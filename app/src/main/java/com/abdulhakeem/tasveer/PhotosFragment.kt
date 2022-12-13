@@ -2,7 +2,6 @@ package com.abdulhakeem.tasveer
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -12,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PhotosFragment : Fragment(R.layout.fragment_album_photos) {
     private val adapter = PhotosAdapter()
-    private val args: PhotosFragmentArgs by navArgs<PhotosFragmentArgs>()
+    private val args: PhotosFragmentArgs by navArgs()
     private val viewModel: PhotosViewModel by viewModels()
     private var _binding: FragmentAlbumPhotosBinding? = null
     private val binding get() = _binding
