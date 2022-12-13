@@ -22,6 +22,10 @@ class AlbumsViewModel @Inject constructor(private val photoRepository: PhotoRepo
     }
 
     init {
+        fetchAlbums()
+    }
+
+    fun fetchAlbums(){
         viewModelScope.launch(coroutineExceptionHandler) {
             _albums.value = photoRepository.fetchAlbums()
         }

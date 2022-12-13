@@ -1,7 +1,10 @@
 package com.abdulhakeem.tasveer
 
+import android.Manifest
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -25,6 +28,22 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums), AdapterClickListener<
         binding?.lifecycleOwner = viewLifecycleOwner
 
         startObservers()
+
+        requestStoragePermissionIfNotGranted(context)
+    }
+
+    private fun requestStoragePermissionIfNotGranted(context: Context?) {
+        context?.run {
+            if (hasStoragePermission().not()) {
+                requestStoragePermission { isGranted ->
+                    if (isGranted) {
+                        viewModel.fetchAlbums()
+                    } else {
+
+                    }
+                }
+            }
+        }
     }
 
     private fun startObservers() {
