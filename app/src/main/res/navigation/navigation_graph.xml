@@ -17,6 +17,11 @@
     <fragment
         android:id="@+id/photos_fragment"
         android:name="com.abdulhakeem.tasveer.PhotosFragment"
-        tools:layout="@layout/fragment_album_photos" />
+        tools:layout="@layout/fragment_album_photos">
+        <argument
+            android:name="album"
+            app:argType="com.abdulhakeem.tasveer.data.Album"
+            app:nullable="false" />
+    </fragment>
 
 </navigation>

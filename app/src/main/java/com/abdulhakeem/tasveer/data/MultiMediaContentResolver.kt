@@ -69,14 +69,14 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
         }
     }
 
-    suspend fun fetchAlbumMedia(albumPath: String): List<Photo> {
+    suspend fun fetchAlbumMedia(albumName: String): List<Photo> {
 
         fetchMediaFromPhoneAndPopulateTheList()
 
         return data.filter {
-            it.path == albumPath
+            it.folderName == albumName
         }.map {
-            Photo(thumbnail = it.folderName, albumName = it.folderName, photoName = it.name)
+            Photo(thumbnail = it.path, albumName = it.folderName, photoName = it.name)
         }
     }
 

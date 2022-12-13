@@ -39,7 +39,7 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums), AdapterClickListener<
     }
 
     override fun onItemClick(item: Album) {
-        findNavController().navigate(AlbumsFragmentDirections.showAlbumPhotos())
+        findNavController().navigate(AlbumsFragmentDirections.showAlbumPhotos(item))
     }
 
 }
