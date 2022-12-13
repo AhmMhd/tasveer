@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/albums_fragment">
+
+    <fragment
+        android:id="@+id/albums_fragment"
+        android:name="com.abdulhakeem.tasveer.AlbumsFragments"
+        tools:layout="@layout/fragment_albums_fragments">
+    </fragment>
+
+    <fragment
+        android:id="@+id/photos_fragment"
+        android:name="com.abdulhakeem.tasveer.PhotosFragment"
+        tools:layout="@layout/fragment_album_photos" />
+
+</navigation>
