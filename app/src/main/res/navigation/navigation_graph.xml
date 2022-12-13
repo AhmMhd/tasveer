@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/albums_fragment"
-        android:name="com.abdulhakeem.tasveer.AlbumsFragments"
-        tools:layout="@layout/fragment_albums_fragments">
+        android:name="com.abdulhakeem.tasveer.AlbumsFragment"
+        tools:layout="@layout/fragment_albums">
     </fragment>
 
     <fragment
