@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.abdulhakeem.tasveer.data.Album
 import com.abdulhakeem.tasveer.databinding.FragmentAlbumsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AlbumsFragment : Fragment(R.layout.fragment_albums) {
+class AlbumsFragment : Fragment(R.layout.fragment_albums), AdapterClickListener<Album> {
 
     private val viewModel: AlbumsViewModel by viewModels()
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding
-    private val adapter = AlbumAdapter()
+    private val adapter = AlbumAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +36,10 @@ class AlbumsFragment : Fragment(R.layout.fragment_albums) {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    override fun onItemClick(item: Album) {
+        findNavController().navigate(AlbumsFragmentDirections.showAlbumPhotos())
     }
 
 }

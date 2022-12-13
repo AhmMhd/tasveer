@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
     app:startDestination="@id/albums_fragment">
 
@@ -9,6 +9,9 @@
         android:id="@+id/albums_fragment"
         android:name="com.abdulhakeem.tasveer.AlbumsFragment"
         tools:layout="@layout/fragment_albums">
+        <action
+            android:id="@+id/show_album_photos"
+            app:destination="@id/photos_fragment" />
     </fragment>
 
     <fragment
