@@ -2,7 +2,6 @@ package com.abdulhakeem.tasveer.data
 
 import android.content.Context
 import android.provider.MediaStore
-import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -13,7 +12,7 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
     private val data = ArrayList<MediaMetaData>()
 
 
-    private fun fetchMediaFromPhoneAndPopulateTheList() {
+    private suspend fun fetchMediaFromPhoneAndPopulateTheList() {
         if (data.isNotEmpty())
             return
 
@@ -48,7 +47,6 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
                             contentType = contentType
                         )
                     data.add(mediaMetaData)
-                    Log.d("TasveerPhoto", mediaMetaData.toString())
                 } while (moveToNext())
             }
         } catch (e: Exception) {
@@ -70,6 +68,7 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
     }
 
     suspend fun fetchAlbumMedia(albumName: String): List<Photo> {
+
 
         fetchMediaFromPhoneAndPopulateTheList()
 
