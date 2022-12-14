@@ -6,6 +6,10 @@ dependencies {
     def hilt_version = "2.44"
     def navigation_comp_version = "2.5.3"
     def glide_version = "4.14.2"
+    def junit_version = "4.13.2"
+    def mockk_version = "1.13.2"
+    def arch_core_version = "2.1.0"
+    def coroutine_test_version = "1.6.0"
 
     implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "androidx.appcompat:appcompat:$app_comp_version"
@@ -20,5 +24,12 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_comp_version"
 //    glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
+
+
+//    test dependencies
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "androidx.arch.core:core-testing:$arch_core_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_test_version"
 
 }
