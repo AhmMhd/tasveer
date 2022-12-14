@@ -5,7 +5,11 @@
 
         <variable
             name="item"
-            type="com.abdulhakeem.tasveer.data.Photo" />
+            type="com.abdulhakeem.tasveer.data.Media" />
+
+        <import type="android.view.View" />
+
+        <import type="com.abdulhakeem.tasveer.data.MediaType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,12 +22,24 @@
             android:id="@+id/thumbnail"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            bind:load="@{item.thumbnail}"
             android:contentDescription="Photo Thumbnail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            bind:load="@{item.thumbnail}" />
 
+
+        <ImageView
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:background="@drawable/bg_play"
+            android:padding="6dp"
+            android:src="@drawable/ic_play"
+            android:visibility="@{item.mediaType == MediaType.Image ? View.GONE : View.VISIBLE }"
+            app:layout_constraintBottom_toBottomOf="@id/thumbnail"
+            app:layout_constraintEnd_toEndOf="@id/thumbnail"
+            app:layout_constraintStart_toStartOf="@id/thumbnail"
+            app:layout_constraintTop_toTopOf="@+id/thumbnail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

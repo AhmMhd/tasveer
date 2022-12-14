@@ -3,7 +3,6 @@ package com.abdulhakeem.tasveer.data
 import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
-import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -103,7 +102,7 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
         }
     }
 
-    suspend fun fetchAlbumMedia(albumName: String): List<Photo> {
+    suspend fun fetchAlbumMedia(albumName: String): List<Media> {
 
 
         fetchMediaFromPhoneAndPopulateTheList()
@@ -111,7 +110,12 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
         return data.filter {
             it.folderName == albumName
         }.map {
-            Photo(thumbnail = it.path, albumName = it.folderName, photoName = it.name)
+            Media(
+                thumbnail = it.path,
+                albumName = it.folderName,
+                photoName = it.name,
+                mediaType = if (it.contentType.contains("video")) MediaType.Video else MediaType.Image
+            )
         }
     }
 

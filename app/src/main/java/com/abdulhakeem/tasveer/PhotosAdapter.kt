@@ -2,10 +2,10 @@ package com.abdulhakeem.tasveer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.abdulhakeem.tasveer.data.Photo
+import com.abdulhakeem.tasveer.data.Media
 import com.abdulhakeem.tasveer.databinding.ItemPhotoBinding
 
-class PhotosAdapter : BaseAdapter<Photo, PhotosViewHolder>() {
+class PhotosAdapter : BaseAdapter<Media, PhotosViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PhotosViewHolder(
         ItemPhotoBinding.inflate(

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.abdulhakeem.tasveer.data.Photo
+import com.abdulhakeem.tasveer.data.Media
 import com.abdulhakeem.tasveer.data.PhotoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -14,8 +14,8 @@ import javax.inject.Inject
 @HiltViewModel
 class PhotosViewModel @Inject constructor(private val repository: PhotoRepository) : ViewModel() {
 
-    private val _photos = MutableLiveData<List<Photo>>()
-    val photos: LiveData<List<Photo>> = _photos
+    private val _photos = MutableLiveData<List<Media>>()
+    val photos: LiveData<List<Media>> = _photos
     var albumName = ""
     private val coroutineExceptionHandler =
         CoroutineExceptionHandler { coroutineContext, throwable ->
