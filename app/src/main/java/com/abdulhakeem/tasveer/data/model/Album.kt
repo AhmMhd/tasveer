@@ -1,4 +1,4 @@
-package com.abdulhakeem.tasveer.data
+package com.abdulhakeem.tasveer.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

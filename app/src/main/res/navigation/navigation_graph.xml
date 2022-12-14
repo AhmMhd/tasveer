@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/albums_fragment"
-        android:name="com.abdulhakeem.tasveer.AlbumsFragment"
+        android:name="com.abdulhakeem.tasveer.ui.albums.AlbumsFragment"
         tools:layout="@layout/fragment_albums">
         <action
             android:id="@+id/show_album_photos"
@@ -16,11 +16,11 @@
 
     <fragment
         android:id="@+id/photos_fragment"
-        android:name="com.abdulhakeem.tasveer.PhotosFragment"
+        android:name="com.abdulhakeem.tasveer.ui.media.PhotosFragment"
         tools:layout="@layout/fragment_album_photos">
         <argument
             android:name="album"
-            app:argType="com.abdulhakeem.tasveer.data.Album"
+            app:argType="com.abdulhakeem.tasveer.data.model.Album"
             app:nullable="false" />
     </fragment>
 

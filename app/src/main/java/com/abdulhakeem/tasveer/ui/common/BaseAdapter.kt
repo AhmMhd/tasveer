@@ -1,4 +1,4 @@
-package com.abdulhakeem.tasveer
+package com.abdulhakeem.tasveer.ui.common
 
 import androidx.recyclerview.widget.RecyclerView
 

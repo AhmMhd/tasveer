@@ -1,17 +1,19 @@
-package com.abdulhakeem.tasveer
+package com.abdulhakeem.tasveer.ui.albums
 
-import android.Manifest
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.abdulhakeem.tasveer.data.Album
+import com.abdulhakeem.tasveer.ui.common.AdapterClickListener
+import com.abdulhakeem.tasveer.AlbumsFragmentDirections
+import com.abdulhakeem.tasveer.data.model.Album
 import com.abdulhakeem.tasveer.databinding.FragmentAlbumsBinding
+import com.abdulhakeem.tasveer.hasStoragePermission
+import com.abdulhakeem.tasveer.requestStoragePermission
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

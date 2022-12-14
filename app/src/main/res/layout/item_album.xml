@@ -5,11 +5,11 @@
 
         <variable
             name="item"
-            type="com.abdulhakeem.tasveer.data.Album" />
+            type="com.abdulhakeem.tasveer.data.model.Album" />
 
         <variable
             name="listener"
-            type="com.abdulhakeem.tasveer.AdapterClickListener" />
+            type="com.abdulhakeem.tasveer.ui.common.AdapterClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,8 +1,9 @@
-package com.abdulhakeem.tasveer
+package com.abdulhakeem.tasveer.ui.media
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.abdulhakeem.tasveer.data.Media
+import com.abdulhakeem.tasveer.ui.common.BaseAdapter
+import com.abdulhakeem.tasveer.data.model.Media
 import com.abdulhakeem.tasveer.databinding.ItemPhotoBinding
 
 class PhotosAdapter : BaseAdapter<Media, PhotosViewHolder>() {

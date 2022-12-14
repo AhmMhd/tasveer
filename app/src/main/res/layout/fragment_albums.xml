@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.abdulhakeem.tasveer.AlbumsViewModel" />
+            type="com.abdulhakeem.tasveer.ui.albums.AlbumsViewModel" />
 
     </data>
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        tools:context=".AlbumsFragment">
+        tools:context=".ui.albums.AlbumsFragment">
 
         <TextView
             android:layout_width="wrap_content"

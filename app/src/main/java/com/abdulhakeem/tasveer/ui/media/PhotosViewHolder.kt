@@ -1,7 +1,7 @@
-package com.abdulhakeem.tasveer
+package com.abdulhakeem.tasveer.ui.media
 
 import androidx.recyclerview.widget.RecyclerView
-import com.abdulhakeem.tasveer.data.Media
+import com.abdulhakeem.tasveer.data.model.Media
 import com.abdulhakeem.tasveer.databinding.ItemPhotoBinding
 
 class PhotosViewHolder(private val binding: ItemPhotoBinding) :

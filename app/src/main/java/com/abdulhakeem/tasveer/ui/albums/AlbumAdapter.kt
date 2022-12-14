@@ -1,10 +1,11 @@
-package com.abdulhakeem.tasveer
+package com.abdulhakeem.tasveer.ui.albums
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.abdulhakeem.tasveer.data.Album
+import com.abdulhakeem.tasveer.ui.common.AdapterClickListener
+import com.abdulhakeem.tasveer.ui.common.BaseAdapter
+import com.abdulhakeem.tasveer.data.model.Album
 import com.abdulhakeem.tasveer.databinding.ItemAlbumBinding
-import com.abdulhakeem.tasveer.di.AlbumViewHolder
 
 class AlbumAdapter(private val listener: AdapterClickListener<Album>) :
     BaseAdapter<Album, AlbumViewHolder>() {

@@ -5,11 +5,11 @@
 
         <variable
             name="item"
-            type="com.abdulhakeem.tasveer.data.Media" />
+            type="com.abdulhakeem.tasveer.data.model.Media" />
 
         <import type="android.view.View" />
 
-        <import type="com.abdulhakeem.tasveer.data.MediaType" />
+        <import type="com.abdulhakeem.tasveer.data.model.MediaType" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

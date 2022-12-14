@@ -1,4 +1,4 @@
-package com.abdulhakeem.tasveer.data
+package com.abdulhakeem.tasveer.data.model
 
 data class MediaMetaData(
     val name: String,

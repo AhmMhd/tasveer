@@ -1,8 +1,8 @@
-package com.abdulhakeem.tasveer.di
+package com.abdulhakeem.tasveer.ui.albums
 
 import androidx.recyclerview.widget.RecyclerView
-import com.abdulhakeem.tasveer.AdapterClickListener
-import com.abdulhakeem.tasveer.data.Album
+import com.abdulhakeem.tasveer.ui.common.AdapterClickListener
+import com.abdulhakeem.tasveer.data.model.Album
 import com.abdulhakeem.tasveer.databinding.ItemAlbumBinding
 
 class AlbumViewHolder(

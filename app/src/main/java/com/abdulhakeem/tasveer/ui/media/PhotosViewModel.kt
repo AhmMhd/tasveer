@@ -1,19 +1,24 @@
-package com.abdulhakeem.tasveer
+package com.abdulhakeem.tasveer.ui.media
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.abdulhakeem.tasveer.data.AlbumType
-import com.abdulhakeem.tasveer.data.Media
-import com.abdulhakeem.tasveer.data.PhotoRepository
+import com.abdulhakeem.tasveer.PhotosFragmentArgs
+import com.abdulhakeem.tasveer.data.model.AlbumType
+import com.abdulhakeem.tasveer.data.model.Media
+import com.abdulhakeem.tasveer.domain.FetchMediaByAlbumNameUserCase
+import com.abdulhakeem.tasveer.domain.FetchMediaByMediaTypeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PhotosViewModel @Inject constructor(private val repository: PhotoRepository) : ViewModel() {
+class PhotosViewModel @Inject constructor(
+    private val fetchMediaByMediaTypeUseCase: FetchMediaByMediaTypeUseCase,
+    private val fetchMediaByAlbumNameUserCase: FetchMediaByAlbumNameUserCase
+) : ViewModel() {
 
     private val _photos = MutableLiveData<List<Media>>()
     val photos: LiveData<List<Media>> = _photos
@@ -33,14 +38,18 @@ class PhotosViewModel @Inject constructor(private val repository: PhotoRepositor
 
     private fun fetchMediaByAlbumName(albumName: String) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            _photos.value = repository.fetchMediaByAlbumName(albumName)
+            fetchMediaByAlbumNameUserCase(albumName).let {
+                _photos.value = it
+            }
         }
     }
 
 
     private fun fetchMediaByAlbumType(albumType: AlbumType) {
         viewModelScope.launch(coroutineExceptionHandler) {
-            _photos.value = repository.fetchMediaByMediaType(albumType)
+            fetchMediaByMediaTypeUseCase(albumType).let {
+                _photos.value = it
+            }
         }
     }
 
