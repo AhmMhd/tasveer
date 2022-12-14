@@ -3,7 +3,9 @@ package com.abdulhakeem.tasveer
 import android.Manifest
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,23 +15,29 @@ import com.abdulhakeem.tasveer.databinding.FragmentAlbumsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AlbumsFragment : Fragment(R.layout.fragment_albums), AdapterClickListener<Album> {
+class AlbumsFragment : Fragment(), AdapterClickListener<Album> {
 
     private val viewModel: AlbumsViewModel by viewModels()
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding
     private val adapter = AlbumAdapter(this)
+    private val flag = false
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentAlbumsBinding.bind(view)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentAlbumsBinding.inflate(LayoutInflater.from(context),container,false)
         binding?.viewModel = viewModel
-        binding?.adapter = adapter
         binding?.lifecycleOwner = viewLifecycleOwner
+        binding?.list?.adapter = adapter
 
         startObservers()
 
         requestStoragePermissionIfNotGranted(context)
+
+        return binding?.root
     }
 
     private fun requestStoragePermissionIfNotGranted(context: Context?) {

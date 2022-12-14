@@ -7,9 +7,6 @@
             name="viewModel"
             type="com.abdulhakeem.tasveer.AlbumsViewModel" />
 
-        <variable
-            name="adapter"
-            type="com.abdulhakeem.tasveer.AlbumAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -51,13 +48,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:id="@+id/list"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/percent_20"
             app:spanCount="2"
-            bind:adapter="@{adapter}"
             tools:itemCount="14"
             tools:listitem="@layout/item_album" />
 
