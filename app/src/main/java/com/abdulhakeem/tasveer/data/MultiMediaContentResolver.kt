@@ -14,6 +14,7 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
 
 
     private suspend fun fetchMediaFromPhoneAndPopulateTheList() {
+
         if (data.isNotEmpty())
             return
 
@@ -50,12 +51,12 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
             imagesCursor?.run {
                 readCursor(this)
             }
+
             videosCursor?.run {
                 readCursor(this)
             }
 
             data.sortBy { it.dataAdded }
-
 
         } catch (e: Exception) {
             e.printStackTrace()
@@ -86,7 +87,6 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
                         dataAdded = dateAdded
                     )
                 data.add(mediaMetaData)
-
             }
         }
     }
@@ -95,14 +95,38 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
 
         fetchMediaFromPhoneAndPopulateTheList()
 
-        return data.distinctBy {
+        val albums = ArrayList<Album>()
+
+
+        data.firstOrNull {
+            it.contentType.contains("video").not()
+        }?.let {
+            albums.add(Album(thumbnail = it.path, albumName = "All Images", AlbumType.Image))
+        }
+
+        data.firstOrNull {
+            it.contentType.contains("video")
+        }?.let {
+            albums.add(Album(thumbnail = it.path, albumName = "All Videos", AlbumType.Video))
+        }
+
+        data.distinctBy {
             it.folderName
         }.map {
-            Album(thumbnail = it.path, albumName = it.folderName)
+            val albumType = when (it.folderName.lowercase()) {
+                "all images" -> AlbumType.Image
+                "all videos" -> AlbumType.Image
+                else -> AlbumType.Mix
+            }
+            Album(thumbnail = it.path, albumName = it.folderName, albumType)
+        }.let {
+            albums.addAll(it)
         }
+
+        return albums
     }
 
-    suspend fun fetchAlbumMedia(albumName: String): List<Media> {
+    suspend fun fetchMediaByAlbumName(albumName: String): List<Media> {
 
 
         fetchMediaFromPhoneAndPopulateTheList()
@@ -119,4 +143,22 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
         }
     }
 
+    suspend fun fetchMediaByMediaType(albumType: AlbumType): List<Media> {
+
+        fetchMediaFromPhoneAndPopulateTheList()
+
+        return data.filter {
+            when (albumType) {
+                AlbumType.Video -> it.contentType.contains("video")
+                else -> it.contentType.contains("video").not()
+            }
+        }.map {
+            Media(
+                it.path,
+                it.folderName,
+                it.name,
+                mediaType = if (it.contentType.contains("video")) MediaType.Video else MediaType.Image
+            )
+        }
+    }
 }
