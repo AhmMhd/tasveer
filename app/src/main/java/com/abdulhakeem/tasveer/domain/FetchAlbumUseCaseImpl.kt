@@ -4,6 +4,8 @@ import com.abdulhakeem.tasveer.data.model.Album
 import com.abdulhakeem.tasveer.data.model.AlbumType
 import com.abdulhakeem.tasveer.data.repository.photos.PhotoRepository
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -11,7 +13,8 @@ class FetchAlbumUseCaseImpl @Inject constructor(
     private val photoRepository: PhotoRepository
 ) : FetchAlbumUseCase{
 
-    override suspend fun invoke(): List<Album> {
+    override suspend fun invoke(): List<Album> = withContext(Dispatchers.IO){
+
 
         val data = photoRepository.fetchExternalStorageMediaContents()
 
@@ -43,7 +46,7 @@ class FetchAlbumUseCaseImpl @Inject constructor(
             albums.addAll(it)
         }
 
-        return albums
+        albums
     }
 
 }
