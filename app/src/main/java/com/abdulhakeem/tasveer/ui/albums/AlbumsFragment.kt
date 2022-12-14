@@ -53,8 +53,6 @@ class AlbumsFragment : Fragment(), AdapterClickListener<Album> {
                         viewModel.fetchAlbums()
                     }
                 })
-            } else {
-                viewModel.fetchAlbums()
             }
         }
     }
