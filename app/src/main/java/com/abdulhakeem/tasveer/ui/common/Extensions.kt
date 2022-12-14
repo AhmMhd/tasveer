@@ -1,21 +1,14 @@
 package com.abdulhakeem.tasveer.ui.common
 
 import android.Manifest
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Environment
-import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import java.lang.String
 
 
 fun Context.hasStoragePermission() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -28,8 +21,7 @@ fun Context.hasStoragePermission() = if (Build.VERSION.SDK_INT >= Build.VERSION_
 }
 
 fun Fragment.requestStoragePermission(
-    callback: (Boolean) -> Unit,
-    activity: Activity
+    callback: (Boolean) -> Unit
 ) {
 
     val requestPermissionLauncher =
@@ -38,7 +30,6 @@ fun Fragment.requestStoragePermission(
         ) { permissions ->
             var hasAllPermissionsGranted = true
             permissions.entries.forEach {
-                val permissionName = it.key
                 val isGranted = it.value
                 hasAllPermissionsGranted = isGranted
             }

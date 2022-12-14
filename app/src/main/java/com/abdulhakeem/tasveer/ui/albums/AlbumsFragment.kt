@@ -10,9 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.abdulhakeem.tasveer.data.model.Album
 import com.abdulhakeem.tasveer.databinding.FragmentAlbumsBinding
+import com.abdulhakeem.tasveer.ui.common.AdapterClickListener
 import com.abdulhakeem.tasveer.ui.common.hasStoragePermission
 import com.abdulhakeem.tasveer.ui.common.requestStoragePermission
-import com.abdulhakeem.tasveer.ui.common.AdapterClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,10 +45,11 @@ class AlbumsFragment : Fragment(), AdapterClickListener<Album> {
 
         viewModel.fetchAlbums()
     }
+
     private fun requestStoragePermissionIfNotGranted(context: Context?) {
         context?.run {
             if (hasStoragePermission().not()) {
-                requestStoragePermission(activity = requireActivity(), callback = { isGranted ->
+                requestStoragePermission(callback = { isGranted ->
                     if (isGranted) {
                         viewModel.fetchAlbums()
                     }
