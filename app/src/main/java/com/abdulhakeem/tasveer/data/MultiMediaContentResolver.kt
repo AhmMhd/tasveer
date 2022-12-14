@@ -1,7 +1,9 @@
 package com.abdulhakeem.tasveer.data
 
 import android.content.Context
+import android.database.Cursor
 import android.provider.MediaStore
+import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,43 +18,77 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
         if (data.isNotEmpty())
             return
 
-        val mediaStoreCursor = context.contentResolver.query(
+        val imagesCursor = context.contentResolver.query(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             arrayOf(
                 MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
                 MediaStore.Images.Media.DISPLAY_NAME,
                 MediaStore.Images.Media.DATA,
-                MediaStore.MediaColumns.MIME_TYPE
+                MediaStore.MediaColumns.MIME_TYPE,
+                MediaStore.MediaColumns.DATE_ADDED
             ),
             null,
             null,
             null
         )
+
+        val videosCursor = context.contentResolver.query(
+            MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+            arrayOf(
+                MediaStore.Video.Media.BUCKET_DISPLAY_NAME,
+                MediaStore.Video.Media.DISPLAY_NAME,
+                MediaStore.Video.Media.DATA,
+                MediaStore.MediaColumns.MIME_TYPE,
+                MediaStore.MediaColumns.DATE_ADDED
+            ),
+            null,
+            null,
+            null
+        )
+
         try {
-            mediaStoreCursor?.run {
-                moveToNext()
-                do {
-                    val name =
-                        getString(getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME))
-                    val folder =
-                        getString(getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
-                    val dataPath = getString(getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
-                    val contentType =
-                        getString(getColumnIndexOrThrow(MediaStore.MediaColumns.MIME_TYPE))
-                    val mediaMetaData =
-                        MediaMetaData(
-                            name = name,
-                            folderName = folder,
-                            path = dataPath,
-                            contentType = contentType
-                        )
-                    data.add(mediaMetaData)
-                } while (moveToNext())
+
+            imagesCursor?.run {
+                readCursor(this)
             }
+            videosCursor?.run {
+                readCursor(this)
+            }
+
+            data.sortBy { it.dataAdded }
+
+
         } catch (e: Exception) {
             e.printStackTrace()
         } finally {
-            mediaStoreCursor?.close()
+            imagesCursor?.close()
+            videosCursor?.close()
+        }
+    }
+
+    private fun readCursor(cursor: Cursor) {
+        with(cursor) {
+            while (moveToNext()) {
+                val name =
+                    getString(getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME))
+                val folder =
+                    getString(getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME))
+                val dataPath = getString(getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
+                val contentType =
+                    getString(getColumnIndexOrThrow(MediaStore.MediaColumns.MIME_TYPE))
+                val dateAdded = getLong(getColumnIndexOrThrow(MediaStore.MediaColumns.DATE_ADDED))
+
+                val mediaMetaData =
+                    MediaMetaData(
+                        name = name,
+                        folderName = folder,
+                        path = dataPath,
+                        contentType = contentType,
+                        dataAdded = dateAdded
+                    )
+                data.add(mediaMetaData)
+
+            }
         }
     }
 
@@ -78,6 +114,5 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
             Photo(thumbnail = it.path, albumName = it.folderName, photoName = it.name)
         }
     }
-
 
 }
