@@ -13,6 +13,7 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
 
     private val data = ArrayList<MediaMetaData>()
 
+    @Synchronized
     fun fetchExternalStorageMediaContents(): List<MediaMetaData> {
         if (data.isNotEmpty())
             return data
@@ -65,6 +66,7 @@ class MultiMediaContentResolver @Inject constructor(@ApplicationContext private 
         return data
     }
 
+    @Synchronized
     private fun readCursor(cursor: Cursor) {
         with(cursor) {
             while (moveToNext()) {
