@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.abdulhakeem.tasveer.PhotosFragmentArgs
 import com.abdulhakeem.tasveer.R
 import com.abdulhakeem.tasveer.databinding.FragmentAlbumPhotosBinding
 import dagger.hilt.android.AndroidEntryPoint

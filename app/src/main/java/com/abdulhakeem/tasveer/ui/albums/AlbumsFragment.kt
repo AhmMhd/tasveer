@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.abdulhakeem.tasveer.ui.common.AdapterClickListener
-import com.abdulhakeem.tasveer.AlbumsFragmentDirections
 import com.abdulhakeem.tasveer.data.model.Album
 import com.abdulhakeem.tasveer.databinding.FragmentAlbumsBinding
 import com.abdulhakeem.tasveer.hasStoragePermission
 import com.abdulhakeem.tasveer.requestStoragePermission
+import com.abdulhakeem.tasveer.ui.common.AdapterClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
