@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.abdulhakeem.tasveer.data.model.Album
 import com.abdulhakeem.tasveer.databinding.FragmentAlbumsBinding
-import com.abdulhakeem.tasveer.hasStoragePermission
-import com.abdulhakeem.tasveer.requestStoragePermission
+import com.abdulhakeem.tasveer.ui.common.hasStoragePermission
+import com.abdulhakeem.tasveer.ui.common.requestStoragePermission
 import com.abdulhakeem.tasveer.ui.common.AdapterClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +22,6 @@ class AlbumsFragment : Fragment(), AdapterClickListener<Album> {
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding
     private val adapter = AlbumAdapter(this)
-    private val flag = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
