@@ -20,8 +20,8 @@ class PhotosFragment : Fragment(R.layout.fragment_album_photos) {
         _binding = FragmentAlbumPhotosBinding.bind(view)
         viewModel.handleArgs(args)
         binding?.viewModel = viewModel
-        binding?.adapter = adapter
         binding?.lifecycleOwner = viewLifecycleOwner
+        binding?.list?.adapter = adapter
 
         startObservers()
     }
