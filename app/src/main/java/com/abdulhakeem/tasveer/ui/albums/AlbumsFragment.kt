@@ -28,7 +28,7 @@ class AlbumsFragment : Fragment(), AdapterClickListener<Album> {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentAlbumsBinding.inflate(LayoutInflater.from(context),container,false)
+        _binding = FragmentAlbumsBinding.inflate(LayoutInflater.from(context), container, false)
         binding?.viewModel = viewModel
         binding?.lifecycleOwner = viewLifecycleOwner
         binding?.list?.adapter = adapter
@@ -40,16 +40,21 @@ class AlbumsFragment : Fragment(), AdapterClickListener<Album> {
         return binding?.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.fetchAlbums()
+    }
     private fun requestStoragePermissionIfNotGranted(context: Context?) {
         context?.run {
             if (hasStoragePermission().not()) {
-                requestStoragePermission { isGranted ->
+                requestStoragePermission(activity = requireActivity(), callback = { isGranted ->
                     if (isGranted) {
                         viewModel.fetchAlbums()
-                    } else {
-
                     }
-                }
+                })
+            } else {
+                viewModel.fetchAlbums()
             }
         }
     }

@@ -12,37 +12,37 @@ import javax.inject.Singleton
 class MultiMediaContentResolver @Inject constructor(@ApplicationContext private val context: Context) {
 
     private val data = ArrayList<MediaMetaData>()
-    private val imagesCursor = context.contentResolver.query(
-        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-        arrayOf(
-            MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
-            MediaStore.Images.Media.DISPLAY_NAME,
-            MediaStore.Images.Media.DATA,
-            MediaStore.MediaColumns.MIME_TYPE,
-            MediaStore.MediaColumns.DATE_ADDED
-        ),
-        null,
-        null,
-        null
-    )
-    private val videosCursor = context.contentResolver.query(
-        MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
-        arrayOf(
-            MediaStore.Video.Media.BUCKET_DISPLAY_NAME,
-            MediaStore.Video.Media.DISPLAY_NAME,
-            MediaStore.Video.Media.DATA,
-            MediaStore.MediaColumns.MIME_TYPE,
-            MediaStore.MediaColumns.DATE_ADDED
-        ),
-        null,
-        null,
-        null
-    )
 
     fun fetchExternalStorageMediaContents(): List<MediaMetaData> {
-
         if (data.isNotEmpty())
             return data
+
+        val imagesCursor = context.contentResolver.query(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            arrayOf(
+                MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+                MediaStore.Images.Media.DISPLAY_NAME,
+                MediaStore.Images.Media.DATA,
+                MediaStore.MediaColumns.MIME_TYPE,
+                MediaStore.MediaColumns.DATE_ADDED
+            ),
+            null,
+            null,
+            null
+        )
+        val videosCursor = context.contentResolver.query(
+            MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+            arrayOf(
+                MediaStore.Video.Media.BUCKET_DISPLAY_NAME,
+                MediaStore.Video.Media.DISPLAY_NAME,
+                MediaStore.Video.Media.DATA,
+                MediaStore.MediaColumns.MIME_TYPE,
+                MediaStore.MediaColumns.DATE_ADDED
+            ),
+            null,
+            null,
+            null
+        )
 
         try {
 

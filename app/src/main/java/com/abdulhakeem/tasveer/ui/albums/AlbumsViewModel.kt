@@ -22,10 +22,6 @@ class AlbumsViewModel @Inject constructor(private val fetchAlbumUseCase: FetchAl
         CoroutineExceptionHandler { coroutineContext, throwable ->
         }
 
-    init {
-        fetchAlbums()
-    }
-
     fun fetchAlbums() {
         viewModelScope.launch(coroutineExceptionHandler) {
             fetchAlbumUseCase().let {
