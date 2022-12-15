@@ -7,7 +7,8 @@ import kotlinx.parcelize.Parcelize
 data class Album(
     val thumbnail: String,
     val albumName: String,
-    val albumType: AlbumType = AlbumType.Mix
+    val albumType: AlbumType = AlbumType.Mix,
+    val totalMediaInAlbum : Int = 0
 ) : Parcelable
 
 enum class AlbumType {

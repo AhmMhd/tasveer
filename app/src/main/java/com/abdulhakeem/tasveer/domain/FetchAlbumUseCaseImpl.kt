@@ -27,13 +27,15 @@ class FetchAlbumUseCaseImpl @Inject constructor(
             data.firstOrNull {
                 it.contentType.contains("video").not()
             }?.let {
-                albums.add(Album(thumbnail = it.path, albumName = "All Images", AlbumType.Image))
+                val totalMedia = data.filter { it.contentType.contains("video").not() }.size
+                albums.add(Album(thumbnail = it.path, albumName = "All Images", AlbumType.Image,totalMedia))
             }
 
             data.firstOrNull {
                 it.contentType.contains("video")
             }?.let {
-                albums.add(Album(thumbnail = it.path, albumName = "All Videos", AlbumType.Video))
+                val totalMedia = data.filter { it.contentType.contains("video") }.size
+                albums.add(Album(thumbnail = it.path, albumName = "All Videos", AlbumType.Video,totalMedia))
             }
 
             data.distinctBy {
@@ -44,7 +46,8 @@ class FetchAlbumUseCaseImpl @Inject constructor(
                     "all videos" -> AlbumType.Image
                     else -> AlbumType.Mix
                 }
-                Album(thumbnail = it.path, albumName = it.folderName, albumType)
+                val totalMedia = data.filter {item-> it.folderName == item.folderName }.size
+                Album(thumbnail = it.path, albumName = it.folderName, albumType,totalMedia)
             }.let {
                 albums.addAll(it)
             }
